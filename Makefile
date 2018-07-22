@@ -1,0 +1,2 @@
+cdump:
+	composer dump-autoload;
