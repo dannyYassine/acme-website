@@ -8,6 +8,7 @@
 
 namespace App\Controllers;
 
+use App\Classes\Mail;
 use Illuminate\Database\Capsule\Manager as Capsule;
 
 interface IRoutableController {
@@ -17,19 +18,21 @@ interface IRoutableController {
 
 class IndexController extends BaseController implements IRoutableController
 {
-    public function show($params)
+    public function handle()
     {
-
-        $users = Capsule::table('users')->where('id', '=', 1)->first();
-
-        var_dump($users);
-
-        echo 'Helloo from ' . __CLASS__ . $params;
-    }
-
-    function handle()
-    {
-
+        $mail = new Mail();
+        $datas = [
+            'to' => 'dannyyassine@gmail.com',
+            'subject' => 'Welcome to the Acme Store',
+            'view' => \ViewTemplate::WELCOME,
+            'name' => 'John Doe',
+            'body' => 'Testing email template'
+        ];
+        if ($mail->send($data)) {
+            echo 'Email sent!';
+        } else {
+            echo 'Email failed';
+        }
     }
 
     function view()

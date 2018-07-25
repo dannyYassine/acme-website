@@ -8,6 +8,9 @@
  * @param array $data
  */
 
+class ViewTemplate {
+    const WELCOME = 'welcome.php';
+}
 
 /**
  * @param $path
@@ -24,4 +27,28 @@ function view($path, array $data = [])
             ->view()
             ->make($path, $data)
             ->render();
+}
+
+/**
+ * Loads file to inject data in it
+ * @param $filename
+ * @param $data
+ * @return string
+ */
+function make($filename, $data)
+{
+    // keys are not available variables in scope
+    extract($data);
+
+    ob_start();
+
+    // include template
+    include(__DIR__ . '/../../resources/views/email' . $filename);
+
+    // get contents
+    $contents = ob_get_contents();
+
+    ob_end_clean();
+
+    return $contents;
 }

@@ -9,7 +9,8 @@
 $router = new AltoRouter;
 
 try {
-    $router->map('GET', '/', 'App\Controllers\IndexController@show', 'home');
+    $router->map('GET', '/', 'App\Controllers\IndexController@handle', 'home');
+    $router->map('GET', '/admin', 'App\Controllers\DashboardController@handle', 'admin');
 } catch (Exception $e) {
     echo $e;
 }
