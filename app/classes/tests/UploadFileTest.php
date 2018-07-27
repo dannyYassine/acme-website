@@ -15,15 +15,19 @@ class UploadFileTest extends TestCase {
     public function testCanReturnFileNameIfNull()
     {
         $uploadFile = new UploadFile();
+
         $this->assertTrue(is_null($uploadFile->getName()));
     }
 
-    public function testReturnValidFileName()
+    public function testShouldReturnValidFileName()
     {
+        $fileNamePattern = '/(some-)[a-z0-9]{32}(-png)/';
         $uploadFile = new UploadFile();
+
         $uploadFile->setName('some.png');
         $fileName = $uploadFile->getName();
-        $this->assertTrue(preg_match('/(some-)[a-z-0-9]{0,32}(-png)/', $fileName) === 1);
+
+        $this->assertTrue(preg_match($fileNamePattern, $fileName) === 1);
     }
 
 }
