@@ -6,53 +6,24 @@
     <title>Admin Panel - @yield('title')</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link rel="stylesheet" href="/css/all.css">
+    <link rel="stylesheet" type="text/css" href="/css/all.css">
+    <script src="https://use.fontawesome.com/e8aff9ba76.js"></script>
 </head>
 <body>
 
-<div class="off-canvas-wrap" data-offcanvas>
-    <div class="inner-wrap">
-        <nav class="tab-bar">
-            <section class="left-small">
-                <a class="left-off-canvas-toggle menu-icon" href="#"><span></span></a>
-            </section>
+@include('includes.side-bar')
 
-            <section class="middle tab-bar-section">
-                <h1 class="title">Foundation</h1>
-            </section>
-
-            <section class="right-small">
-                <a class="right-off-canvas-toggle menu-icon" href="#"><span></span></a>
-            </section>
-        </nav>
-
-        <aside class="left-off-canvas-menu">
-            <ul class="off-canvas-list">
-                <li><label>Foundation</label></li>
-                <li><a href="#">The Psychohistorians</a></li>
-                <li><a href="#">...</a></li>
-            </ul>
-        </aside>
-
-        <aside class="right-off-canvas-menu">
-            <ul class="off-canvas-list">
-                <li><label>Users</label></li>
-                <li><a href="#">Hari Seldon</a></li>
-                <li><a href="#">...</a></li>
-            </ul>
-        </aside>
-
-        <section class="main-section">
-            <!-- content goes here -->
-            @yield('content')
-
-        </section>
-
-        <a class="exit-off-canvas"></a>
-
+<div class="off-canvas-content admin_title_bar" data-off-canvas-content>
+    <div class="title-bar">
+        <div class="title-bar-left">
+            <button class="menu-icon hide-for-large" type="button" data-open="offCanvasLeft"></button>
+            <span class="title-bar-title">{{ getenv('APP_NAME')  }}</span>
+        </div>
     </div>
+    @yield('content')
+
 </div>
 
-<script src="/js/all.js"></script>
+<script src="/js/all.js" type="text/javascript"></script>
 </body>
 </html>

@@ -8,19 +8,28 @@
 
 namespace App\Classes;
 
+use Symfony\Component\Debug\Exception\FatalErrorException;
+use Whoops\Exception\ErrorException;
 use Whoops\Handler\PrettyPageHandler;
 use Whoops\Run;
 
 class ErrorHandler
 {
+    private static $whoops;
+
+    public static function handleException($e)
+    {
+        self::$whoops->handleException($e);
+    }
+
     public function handleErrors($error_number, $error_message, $error_file, $error_line)
     {
         $env = getenv('APP_ENV');
 
         if ($env === 'local') {
-            $whoops = new Run;
-            $whoops->pushHandler(new PrettyPageHandler());
-            $whoops->register();
+            self::$whoops = new Run;
+            self::$whoops->pushHandler(new PrettyPageHandler());
+            self::$whoops->register();
         } else {
             $error = "[{$error_number}] An error occured in file {$error_file} on {$error_line}: {$error_message}";
 

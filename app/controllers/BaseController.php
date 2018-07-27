@@ -8,9 +8,20 @@
 
 namespace App\Controllers;
 
-class BaseController
+class BaseController implements IRoutableController
 {
     public function __construct()
     {
+
+    }
+
+    function handle()
+    {
+        return $this;
+    }
+
+    function view()
+    {
+
     }
 }

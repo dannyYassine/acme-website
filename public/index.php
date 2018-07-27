@@ -6,4 +6,8 @@
  * Time: 7:49 AM
  */
 
-require_once __DIR__.'/../bootstrap/init.php';
+try {
+    require_once __DIR__.'/../bootstrap/init.php';
+} catch (Exception $e) {
+    \App\Classes\ErrorHandler::handleException($e);
+}

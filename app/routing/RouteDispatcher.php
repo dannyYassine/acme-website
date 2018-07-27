@@ -21,15 +21,20 @@ class RouteDispatcher
         $this->match = $router->match();
 
         if ($this->match) {
-            list($controller, $method) = explode('@', $this->match['target']);
-            $this->controller = $controller;
-            $this->method = $method;
-
-            if (is_callable(array(new $this->controller, $this->method))) {
-                call_user_func_array(array(new $this->controller, $this->method), array($this->method['params']));
+            if (is_callable($this->match['target'])) {
+                call_user_func_array( $this->match['target'], $this->match['params'] );
             } else {
-                echo 'This method {$this->method} is not defined in ${$this->controller}';
+                list($controller, $method) = explode('@', $this->match['target']);
+                $this->controller = $controller;
+                $this->method = $method;
+
+                if (is_callable(array(new $this->controller, $this->method))) {
+                    call_user_func_array(array(new $this->controller, $this->method), array($this->method['params']));
+                } else {
+                    echo 'This method {$this->method} is not defined in ${$this->controller}';
+                }
             }
+
         } else {
             view('error/404');
         }

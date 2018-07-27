@@ -11,9 +11,9 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title><? $data['subject'] ?></title>
+    <title><?= 'Email' ?></title>
 </head>
 <body>
-<? $data['subject'] ?>
+<?= $data ?>
 </body>
 </html>

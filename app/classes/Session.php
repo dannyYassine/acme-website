@@ -1,7 +1,70 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: dannyyassine
- * Date: 2018-07-26
- * Time: 10:03 PM
- */
+
+namespace App\Classes;
+
+class SessionKey
+{
+    const ADMIN = 'admin';
+    const TOKEN = 'token';
+}
+
+class Session
+{
+
+
+    /**
+     * create a session
+     *
+     * @param $name
+     * @param $value
+     * @return mixed
+     * @throws \Exception
+     */
+    public static function add($name, $value)
+    {
+        if($name != '' && !empty($name) && $value != '' && !empty($value)){
+            return $_SESSION[$name] = $value;
+        }
+
+        throw new \Exception('Name and value required');
+    }
+
+    /**
+     * get value from session
+     *
+     * @param $name
+     * @return mixed
+     */
+    public static function get($name)
+    {
+        return $_SESSION[$name];
+    }
+
+    /**
+     * check is session exists
+     *
+     * @param $name
+     * @return bool
+     * @throws \Exception
+     */
+    public static function has($name)
+    {
+        if($name != '' && !empty($name)){
+            return (isset($_SESSION[$name])) ? true : false;
+        }
+
+        throw new \Exception('name is required');
+    }
+
+    /**
+     * Remove session
+     * @param $name
+     * @throws \Exception
+     */
+    public static function remove($name)
+    {
+        if(self::has($name)){
+            unset($_SESSION[$name]);
+        }
+    }
+}

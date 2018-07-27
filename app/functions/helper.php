@@ -9,7 +9,7 @@
  */
 
 class ViewTemplate {
-    const WELCOME = 'welcome.php';
+    const WELCOME = '/welcome.php';
 }
 
 /**
@@ -43,12 +43,12 @@ function make($filename, $data)
     ob_start();
 
     // include template
-    include(__DIR__ . '/../../resources/views/email' . $filename);
+    include(__DIR__ . '/../../resources/views/email/' . $filename);
 
     // get contents
     $contents = ob_get_contents();
 
     ob_end_clean();
 
-    return $contents;
+    return 'Sent!';
 }

@@ -31,6 +31,8 @@ elixir(function (mix) {
             //other dependencies
 
             bowerPath + '/slick-carousel/slick/slick.min.js',
+
+            'js/*.js'
         ],
         'public/js/all.js',
         'resources/assets'

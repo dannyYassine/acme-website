@@ -16,12 +16,24 @@ interface IRoutableController {
     function view();
 }
 
-class IndexController extends BaseController implements IRoutableController
+class IndexController extends BaseController
 {
     public function handle()
     {
+        echo 'hello';
+
+        return parent::handle();
+    }
+
+    function view()
+    {
+
+    }
+
+    function email()
+    {
         $mail = new Mail();
-        $datas = [
+        $data = [
             'to' => 'dannyyassine@gmail.com',
             'subject' => 'Welcome to the Acme Store',
             'view' => \ViewTemplate::WELCOME,
@@ -33,10 +45,5 @@ class IndexController extends BaseController implements IRoutableController
         } else {
             echo 'Email failed';
         }
-    }
-
-    function view()
-    {
-
     }
 }

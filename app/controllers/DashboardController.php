@@ -6,10 +6,29 @@
  * Time: 8:36 AM
  */
 
-class DashboardController extends \App\Controllers\BaseController
+namespace App\Controllers;
+
+use App\Classes\Session;
+use App\Classes\SessionKey;
+
+class DashboardController extends BaseController
 {
     public function handle()
     {
-        view('admin/dashboard');
+
+        Session::add(SessionKey::ADMIN, 'You are here!');
+
+        if (Session::has(SessionKey::ADMIN)) {
+            $msg = Session::get(SessionKey::ADMIN);
+        } else {
+            $msg = 'Not defined';
+        }
+
+        view('admin/dashboard', ['admin' => $msg]);
+    }
+
+    public function view()
+    {
+
     }
 }
