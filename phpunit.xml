@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit
+        colors="false"
+        convertErrorsToExceptions="false"
+        convertNoticesToExceptions="false"
+        convertWarningsToExceptions="false"
+        stopOnFailure="false">
+
+    <testsuites>
+        <testsuite name="AllTests">
+            <directory>app</directory>
+        </testsuite>
+    </testsuites>
+
+    <filter>
+        <whitelist processUncoveredFilesFromWhitelist="true">
+            <directory suffix=".php">app</directory>
+            <exclude>
+                <directory suffix=".php">bootstrap</directory>
+                <directory suffix="Test.php">app</directory>
+            </exclude>
+        </whitelist>
+    </filter>
+</phpunit>

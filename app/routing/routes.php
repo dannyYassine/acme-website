@@ -9,11 +9,29 @@
 $router = new AltoRouter;
 
 try {
-    $router->map('GET', '/', 'App\Controllers\IndexController@handle', 'home');
-    $router->map('GET', '/admin', 'App\Controllers\DashboardController@handle', 'admin');
-    $router->map('GET', '/admin/users', function() {
-            \App\Classes\AdminModuleFactory::rootPage()->handle();
-    });
+    // admin routes
+    $router->map(
+        'GET',
+        '/admin',
+        'App\Controllers\Admin\DashboardController@get',
+        'admin_get');
+    $router->map(
+        'POST',
+        '/admin',
+        'App\Controllers\Admin\DashboardController@get',
+        'admin_post');
+
+    // product management
+    $router->map(
+        'GET',
+        '/admin/product/categories',
+        'App\Controllers\Admin\ProductCategoryController@show',
+        'product_category_get');
+    $router->map(
+        'POST',
+        '/admin/product/categories',
+        'App\Controllers\Admin\ProductCategoryController@store',
+        'product_category_post');
 } catch (Exception $e) {
     \App\Classes\ErrorHandler::handleException($e);
 }

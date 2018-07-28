@@ -6,8 +6,11 @@
  * Time: 8:36 AM
  */
 
-namespace App\Controllers;
+namespace App\Controllers\Admin;
 
+use App\Controllers\BaseController;
+
+use App\Classes\Request;
 use App\Classes\Session;
 use App\Classes\SessionKey;
 
@@ -30,5 +33,12 @@ class DashboardController extends BaseController
     public function view()
     {
 
+    }
+
+    public function get()
+    {
+        Request::refresh();
+        $data = Request::old('post', 'product');
+        var_dump($data);
     }
 }

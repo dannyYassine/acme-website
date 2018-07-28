@@ -9,6 +9,9 @@
 namespace App\Classes;
 
 use Illuminate\Database\Capsule\Manager as Capsule;
+// Set the event dispatcher used by Eloquent models... (optional)
+use Illuminate\Events\Dispatcher;
+use Illuminate\Container\Container;
 
 class Database
 {
@@ -24,8 +27,10 @@ class Database
             'password' => getenv('DB_PASSWORD'),
             'charset' => 'utf8',
             'collation' => 'utf8_unicode_ci',
-            'prefix' => ''
+            'prefix'    => ''
         ]);
+
+        $db->setEventDispatcher(new Dispatcher(new Container));
 
         $db->setAsGlobal();
         $db->bootEloquent();

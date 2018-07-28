@@ -30,4 +30,17 @@ class UploadFileTest extends TestCase {
         $this->assertTrue(preg_match($fileNamePattern, $fileName) === 1);
     }
 
+
+    public function testFileSizeShouldReturnFalseWhenFileIsBelowMaximum()
+    {
+        $uploadFile = new UploadFile();
+        $this->assertFalse($uploadFile->fileSize('some.png'));
+    }
+
+    public function testFileSizeShouldReturnTrueWhenFileIsAboveMaximum()
+    {
+        $uploadFile = new UploadFile();
+        $this->assertTrue($uploadFile->fileSize(1));
+    }
+
 }
