@@ -4,7 +4,7 @@
 
     <div class="image-holder text-center">
         <img src="/images/terry.png" alt="Terry" title="Admin"/>
-        <p><?php echo e($admin); ?></p>
+        <p><?php echo e(\App\Classes\Session::get('admin')); ?></p>
     </div>
 
     <!-- Close button -->

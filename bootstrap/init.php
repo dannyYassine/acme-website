@@ -6,6 +6,9 @@
  * Time: 8:12 AM
  */
 
+use App\Classes\Session;
+use App\Classes\SessionKey;
+
 
 /**
  * Start session if not already started
@@ -22,6 +25,8 @@ set_error_handler([new \App\Classes\ErrorHandler(), 'handleErrors']);
 
 // Database
 $db = new \App\Classes\Database();
+
+Session::add(SessionKey::ADMIN, 'Danny Yassine');
 
 // All routes
 require_once __DIR__ . '/../app/routing/routes.php';

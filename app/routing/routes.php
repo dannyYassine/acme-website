@@ -13,7 +13,7 @@ try {
     $router->map(
         'GET',
         '/admin',
-        'App\Controllers\Admin\DashboardController@get',
+        'App\Controllers\Admin\DashboardController@handle',
         'admin_get');
     $router->map(
         'POST',
@@ -30,7 +30,7 @@ try {
     $router->map(
         'POST',
         '/admin/product/categories',
-        'App\Controllers\Admin\ProductCategoryController@store',
+        'App\Controllers\Admin\ProductCategoryController@POST',
         'product_category_post');
 } catch (Exception $e) {
     \App\Classes\ErrorHandler::handleException($e);

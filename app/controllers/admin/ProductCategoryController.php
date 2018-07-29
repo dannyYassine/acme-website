@@ -8,19 +8,50 @@
 
 namespace App\Controllers\Admin;
 
+use App\Classes\CSRFToken;
+use App\Classes\Request;
+use App\Classes\ValidateRequest;
+use App\Classes\Validators\CategoryValidator;
 use App\Models\Category;
+use App\Models\Mappers\CategoryTransformMapper;
 
 class ProductCategoryController
 {
     public function show()
     {
-        $categories = Category::all();
-        var_dump($categories);
-        exit;
+        $total = Category::all()->count();
+        $object = new Category();
+
+        list($categories, $links) = paginate(2, $total, new CategoryTransformMapper());
+
+        return view('admin/products/categories', ['categories' => $categories, 'links' => $links]);
     }
 
-    public function store()
+    public function POST()
     {
+        if (Request::has('post')) {
+            $request = Request::get('post');
 
+            if (CSRFToken::verifyCSRFToken($request->token)) {
+
+                $validator = new CategoryValidator();
+                $validator->validate(to_array($request));
+
+                if ($validator->hasError()) {
+                    var_dump($validator->getErrorMessages());
+                    exit;
+                }
+
+                Category::create([
+                    'name' => $request->name,
+                    'slug' => slug($request->name)
+                ]);
+
+                $categories = Category::all();
+                $message = 'Category created';
+                return view('admin/products/categories', ['categories' => $categories, 'message' => $message]);
+            }
+            throw new \Exception('Token mismatch');
+        }
     }
 }

@@ -4,7 +4,7 @@
 
     <div class="image-holder text-center">
         <img src="/images/terry.png" alt="Terry" title="Admin"/>
-        <p>{{ $admin }}</p>
+        <p>{{ \App\Classes\Session::get('admin')  }}</p>
     </div>
 
     <!-- Close button -->

@@ -18,9 +18,6 @@ class DashboardController extends BaseController
 {
     public function handle()
     {
-
-        Session::add(SessionKey::ADMIN, 'You are here!');
-
         if (Session::has(SessionKey::ADMIN)) {
             $msg = Session::get(SessionKey::ADMIN);
         } else {
@@ -37,7 +34,6 @@ class DashboardController extends BaseController
 
     public function get()
     {
-        Request::refresh();
         $data = Request::old('post', 'product');
         var_dump($data);
     }

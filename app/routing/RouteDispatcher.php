@@ -9,6 +9,7 @@
 namespace App\Routing;
 
 use AltoRouter;
+use App\Classes\ErrorHandler;
 
 class RouteDispatcher
 {
@@ -29,7 +30,11 @@ class RouteDispatcher
                 $this->method = $method;
 
                 if (is_callable(array(new $this->controller, $this->method))) {
-                    call_user_func_array(array(new $this->controller, $this->method), array($this->method['params']));
+                    try {
+                        call_user_func_array(array(new $this->controller, $this->method), array($this->method['params']));
+                    } catch (\Exception $e) {
+                        ErrorHandler::handleException($e);
+                    }
                 } else {
                     echo 'This method {$this->method} is not defined in ${$this->controller}';
                 }

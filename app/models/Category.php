@@ -13,12 +13,22 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Category extends Model
 {
-    use SoftDeletes;
+    CONST TABLE_NAME = 'categories';
 
-    protected $table = "categories";
+    /**
+     * Table Name
+     * @var string
+     */
+    protected $table = self::TABLE_NAME;
+
+    /**
+     * Will ignore columns with deleted_at NOT NULL
+     */
+    use SoftDeletes;
 
     /**
      * Automatically populate column data on new row
+     * As set to true, all dates fields are Carbon objects
      * @var bool
      */
     public $timestamps = true;

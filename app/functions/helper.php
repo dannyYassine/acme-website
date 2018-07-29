@@ -8,6 +8,10 @@
  * @param array $data
  */
 
+use Illuminate\Database\Capsule\Manager as Capsule;
+use voku\helper\Paginator;
+use App\Models\Mappers\TransformMapper;
+
 class ViewTemplate {
     const WELCOME = '/welcome.php';
 }
@@ -51,4 +55,41 @@ function make($filename, $data)
     ob_end_clean();
 
     return 'Sent!';
+}
+
+/**
+ * Generate slug from value
+ * regular-expressions.info/unicode.html
+ * @param $value
+ * @return string
+ */
+function slug($value)
+{
+    // Remove all characters not in this list: underscores | letters | numbers | whitespace
+    $value = preg_replace('![^'.preg_quote('_').'\pL\pN\s]+!u', '', mb_strtolower($value));
+    // replace underscore with a dash
+    $value = preg_replace('!['.preg_quote('-').'\s]+!u', '-', $value);
+    // remove whitespaces
+    return trim($value, '-');
+}
+
+/**
+ * Converts an stdClass to array
+ * @param $stdClass
+ * @return mixed
+ */
+function to_array($stdClass)
+{
+    return json_decode(json_encode($stdClass), true);
+}
+
+function paginate($number_of_records, $total_record, TransformMapper $mapper)
+{
+    $table_name = $mapper->getTableName();
+    $pages = new Paginator($number_of_records, 'p');
+    $pages->set_total($total_record);
+
+    $data = Capsule::select("SELECT * from $table_name ORDER BY created_at DESC " . $pages->get_limit());
+
+    return [$mapper->toModelList($data), $pages->page_links()];
 }

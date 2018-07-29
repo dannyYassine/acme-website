@@ -14,6 +14,10 @@ class ComposerStaticInit079724daab60821871e57f547bd1210a
     );
 
     public static $prefixLengthsPsr4 = array (
+        'v' => 
+        array (
+            'voku\\helper\\' => 12,
+        ),
         'p' => 
         array (
             'phpDocumentor\\Reflection\\' => 25,
@@ -62,6 +66,10 @@ class ComposerStaticInit079724daab60821871e57f547bd1210a
     );
 
     public static $prefixDirsPsr4 = array (
+        'voku\\helper\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/voku/pagination/src/voku/helper',
+        ),
         'phpDocumentor\\Reflection\\' => 
         array (
             0 => __DIR__ . '/..' . '/phpdocumentor/reflection-common/src',
@@ -186,13 +194,20 @@ class ComposerStaticInit079724daab60821871e57f547bd1210a
         'App\\Classes\\HandleRoutable' => __DIR__ . '/../..' . '/app/factories/AdminModuleFactory.php',
         'App\\Classes\\Mail' => __DIR__ . '/../..' . '/app/classes/Mail.php',
         'App\\Classes\\Redirect' => __DIR__ . '/../..' . '/app/classes/Redirect.php',
+        'App\\Classes\\Request' => __DIR__ . '/../..' . '/app/classes/Request.php',
         'App\\Classes\\Session' => __DIR__ . '/../..' . '/app/classes/Session.php',
         'App\\Classes\\SessionKey' => __DIR__ . '/../..' . '/app/classes/Session.php',
         'App\\Classes\\UploadFile' => __DIR__ . '/../..' . '/app/classes/UploadFile.php',
+        'App\\Classes\\Validators\\BaseValidateRequest' => __DIR__ . '/../..' . '/app/classes/validators/BaseValidateRequest.php',
+        'App\\Classes\\Validators\\CategoryValidator' => __DIR__ . '/../..' . '/app/classes/validators/CategoryValidator.php',
+        'App\\Controllers\\Admin\\DashboardController' => __DIR__ . '/../..' . '/app/controllers/admin/DashboardController.php',
+        'App\\Controllers\\Admin\\ProductCategoryController' => __DIR__ . '/../..' . '/app/controllers/admin/ProductCategoryController.php',
         'App\\Controllers\\BaseController' => __DIR__ . '/../..' . '/app/controllers/BaseController.php',
-        'App\\Controllers\\DashboardController' => __DIR__ . '/../..' . '/app/controllers/DashboardController.php',
         'App\\Controllers\\IRoutableController' => __DIR__ . '/../..' . '/app/controllers/IndexController.php',
         'App\\Controllers\\IndexController' => __DIR__ . '/../..' . '/app/controllers/IndexController.php',
+        'App\\Models\\Category' => __DIR__ . '/../..' . '/app/models/Category.php',
+        'App\\Models\\Mappers\\CategoryTransformMapper' => __DIR__ . '/../..' . '/app/models/mappers/CategoryTransformMapper.php',
+        'App\\Models\\Mappers\\TransformMapper' => __DIR__ . '/../..' . '/app/models/mappers/TransformMapper.php',
         'App\\Routing\\RouteDispatcher' => __DIR__ . '/../..' . '/app/routing/RouteDispatcher.php',
         'App\\Services\\AdminService' => __DIR__ . '/../..' . '/app/services/AdminService.php',
         'Carbon\\Carbon' => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon/Carbon.php',
@@ -1387,6 +1402,8 @@ class ComposerStaticInit079724daab60821871e57f547bd1210a
         'phpDocumentor\\Reflection\\Types\\String_' => __DIR__ . '/..' . '/phpdocumentor/type-resolver/src/Types/String_.php',
         'phpDocumentor\\Reflection\\Types\\This' => __DIR__ . '/..' . '/phpdocumentor/type-resolver/src/Types/This.php',
         'phpDocumentor\\Reflection\\Types\\Void_' => __DIR__ . '/..' . '/phpdocumentor/type-resolver/src/Types/Void_.php',
+        'voku\\helper\\Paginator' => __DIR__ . '/..' . '/voku/pagination/src/voku/helper/Paginator.php',
+        'voku\\helper\\PaginatorHelper' => __DIR__ . '/..' . '/voku/pagination/src/voku/helper/PaginatorHelper.php',
     );
 
     public static function getInitializer(ClassLoader $loader)
