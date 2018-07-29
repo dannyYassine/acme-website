@@ -1,4 +1,7 @@
-.idea
+.idea/*
+
 node_modules/
+
 vendor/
+
 resources/assets/bower/
