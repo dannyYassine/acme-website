@@ -89,7 +89,7 @@ function paginate($number_of_records, $total_record, TransformMapper $mapper)
     $pages = new Paginator($number_of_records, 'p');
     $pages->set_total($total_record);
 
-    $data = Capsule::select("SELECT * from $table_name ORDER BY created_at DESC " . $pages->get_limit());
+    $data = Capsule::select("SELECT * from $table_name WHERE deleted_at is NULL ORDER BY created_at DESC " . $pages->get_limit());
 
     return [$mapper->toModelList($data), $pages->page_links()];
 }

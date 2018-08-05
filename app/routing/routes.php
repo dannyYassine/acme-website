@@ -32,6 +32,27 @@ try {
         '/admin/product/categories',
         'App\Controllers\Admin\ProductCategoryController@POST',
         'product_category_post');
+
+    $router->map(
+        'POST',
+        '/admin/product/categories/[i:id]/edit',
+        'App\Controllers\Admin\ProductCategoryController@edit',
+        'edit_product_category_post');
+
+    $router->map(
+        'POST',
+        '/admin/product/categories/[i:id]/delete',
+        'App\Controllers\Admin\ProductCategoryController@DELETE',
+        'edit_product_category_delete');
+
+    $router->map(
+        'GET',
+        '/api/php_info',
+        function () {
+            phpinfo();
+        },
+        'api_php_info'
+    );
 } catch (Exception $e) {
     \App\Classes\ErrorHandler::handleException($e);
 }

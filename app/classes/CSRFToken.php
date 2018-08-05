@@ -12,7 +12,7 @@ class CSRFToken
     /**
      * Produces token for session
      * @return mixed
-     * @throws Exception
+     * @throws \Exception
      */
     public static function _token()
     {
@@ -26,12 +26,16 @@ class CSRFToken
     /**
      * Verifies request token
      * @param $requestToken
-     * @throws Exception
+     * @param bool $regenerate
+     * @return bool
+     * @throws \Exception
      */
-    public static function verifyCSRFToken($requestToken)
+    public static function verifyCSRFToken($requestToken, $regenerate = true)
     {
         if (\App\Classes\Session::has(SessionKey::TOKEN) && \App\Classes\Session::get(SessionKey::TOKEN) === $requestToken) {
-            Session::remove(SessionKey::TOKEN);
+            if ($regenerate) {
+                Session::remove(SessionKey::TOKEN);
+            }
             return true;
         }
         return false;

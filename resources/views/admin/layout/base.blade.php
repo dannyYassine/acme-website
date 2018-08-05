@@ -9,7 +9,7 @@
     <link rel="stylesheet" type="text/css" href="/css/all.css">
     <script src="https://use.fontawesome.com/e8aff9ba76.js"></script>
 </head>
-<body>
+<body data-page-id="@yield('data-page-id')">
 
 @include('includes.side-bar')
 

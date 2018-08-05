@@ -31,7 +31,7 @@ class RouteDispatcher
 
                 if (is_callable(array(new $this->controller, $this->method))) {
                     try {
-                        call_user_func_array(array(new $this->controller, $this->method), array($this->method['params']));
+                        call_user_func_array(array(new $this->controller, $this->method), array($this->match['params']));
                     } catch (\Exception $e) {
                         ErrorHandler::handleException($e);
                     }
