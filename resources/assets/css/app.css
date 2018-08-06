@@ -5872,6 +5872,13 @@ a.thumbnail image {
   color: #0a0a0a;
 }
 
+h2 {
+  font-size: 1.5rem;
+  font-weight: 500;
+  margin-top: 1rem;
+  margin-bottom: 1.2rem;
+}
+
 .reveal {
   border: 0;
   border-radius: 0.5rem;
@@ -5879,11 +5886,6 @@ a.thumbnail image {
 
 .reveal:focus {
   outline-style: none;
-}
-
-.reveal h2 {
-  font-size: 1.5rem;
-  font-weight: 500;
 }
 
 .notification {

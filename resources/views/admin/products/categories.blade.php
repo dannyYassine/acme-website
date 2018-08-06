@@ -5,7 +5,7 @@
 @section('content')
 
     <div class="categories">
-        <div class="row expanded">
+        <div class="row expanded column">
             <h2>Product Categories</h2>
         </div>
     </div>
@@ -47,10 +47,13 @@
                                 <td>{{ $category['slug'] }}</td>
                                 <td>{{ $category['added'] }}</td>
                                 <td width="100" class="text-right">
-                                    <span>
+                                    <span class="has-tip top" data-tooltip tabindex="1" title="Add Sub-category">
+                                        <a data-open="add-subcategory-{{$category['id']}}"><i class="fa fa-plus"></i></a>
+                                    </span>
+                                    <span class="has-tip top" data-tooltip tabindex="1" title="Edit Category">
                                         <a data-open="item-{{$category['id']}}"><i class="fa fa-edit"></i></a>
                                     </span>
-                                    <span style="display: inline-block;">
+                                    <span style="display: inline-block;" class="has-tip top" data-tooltip tabindex="1" title="Delete Category">
                                         <form method="POST" action="/admin/product/categories/{{$category['id']}}/delete" class="delete-item">
                                             <input hidden name="token" value="{{\App\Classes\CSRFToken::_token()}}">
                                             <button type="submit"><i class="fa fa-times delete"></i></button>
@@ -79,6 +82,36 @@
                                                            data-token="{{\App\Classes\CSRFToken::_token()}}"
                                                            class="button update-category"
                                                            value="Update">
+                                                </div>
+                                            </div>
+                                        </form>
+                                        <a href="/admin/product/categories" class="close-button" aria-label="Close modal" type="button">
+                                            <span aria-hidden="true">&times;</span>
+                                        </a>
+                                    </div>
+
+                                    <!-- Add Sub-Category Moal -->
+                                    <div class="reveal"
+                                         id="add-subcategory-{{$category['id']}}"
+                                         data-reveal
+                                         data-close-on-click="false"
+                                         data-close-on-esc="false"
+                                         data-animation-in="scale-in-up"
+                                         data-animation-out="scale-out-down">
+                                        <div class="notification callout primary">
+
+                                        </div>
+                                        <h2>Add Subcategory</h2>
+                                        <form>
+                                            <div class="input-group">
+                                                <input id="subcategory-name-{{$category['id']}}"
+                                                       type="text"/>
+                                                <div>
+                                                    <input id="{{$category['id']}}"
+                                                           type="submit"
+                                                           data-token="{{\App\Classes\CSRFToken::_token()}}"
+                                                           class="button add-subcategory"
+                                                           value="Create">
                                                 </div>
                                             </div>
                                         </form>

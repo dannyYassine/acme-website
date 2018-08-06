@@ -1,4 +1,4 @@
-<div class="row expanded">
+<div class="row expanded column">
     @if(isset($errors) && count($errors))
         <div class="callout alert" data-closable>
             @foreach($errors as $error_array)
@@ -13,9 +13,13 @@
         </div>
     @endif
 
-        @if(isset($success))
+        @if(isset($success) || App\Classes\Session::has('success'))
             <div class="callout success" data-closable>
-                {{  $success }}
+                @if (isset($success))
+                    {{ $success }}
+                @elseif(\App\Classes\Session::has('success'))
+                    {{ \App\Classes\Session::flash('success')  }}
+                @endif
                 <button class="close-button" aria-label="Dismiss message" type="button" data-close>
                     <span aria-hidden="true">&times;</span>
                 </button>

@@ -6,13 +6,14 @@
  * Time: 11:24 AM
  */
 
+use App\Routing\RouteBuilder;
 $router = new AltoRouter;
 
 try {
     // admin routes
     $router->map(
         'GET',
-        '/admin',
+        RouteBuilder::instance()->setBase('admin')->build(),
         'App\Controllers\Admin\DashboardController@handle',
         'admin_get');
     $router->map(
@@ -33,6 +34,13 @@ try {
         'App\Controllers\Admin\ProductCategoryController@POST',
         'product_category_post');
 
+    RouteBuilder::instance()
+        ->setBase('admin')
+        ->addPath('product')
+        ->addPath('categories')
+        ->addPath('[i:id]')
+        ->addPath('edit');
+
     $router->map(
         'POST',
         '/admin/product/categories/[i:id]/edit',
@@ -51,8 +59,7 @@ try {
         function () {
             phpinfo();
         },
-        'api_php_info'
-    );
+        'api_php_info');
 } catch (Exception $e) {
     \App\Classes\ErrorHandler::handleException($e);
 }
