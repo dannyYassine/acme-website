@@ -5872,6 +5872,16 @@ a.thumbnail image {
   color: #0a0a0a;
 }
 
+table {
+  border-collapse: collapse;
+}
+
+table th, table tr, table td {
+  font-size: 0.8rem;
+  padding: 1rem;
+  border: 1px solid #cccccc;
+}
+
 h2 {
   font-size: 1.5rem;
   font-weight: 500;

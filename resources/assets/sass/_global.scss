@@ -1,4 +1,14 @@
 
+table {
+    border-collapse: collapse;
+
+    th, tr, td {
+        font-size: 0.8rem;
+        padding: 1rem;
+        border: 1px solid #cccccc;
+    }
+}
+
 h2 {
     font-size: 1.5rem;
     font-weight: 500;

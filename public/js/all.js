@@ -18,6 +18,58 @@ this.inputs.eq(t).attr({id:i,max:this.options.end,min:this.options.start,step:th
 ;(function (admin) {
     'use strict';
 
+    admin.create = function () {
+
+        $('.add-subcategory').click(function (event) {
+            event.preventDefault();
+
+            const token = $(this).data('token');
+            const category_id = $(this).attr('id');
+            const name = $('#subcategory-name-'+ category_id).val();
+
+            console.log(token);
+
+            $.ajax({
+                type: 'POST',
+                url: `/admin/product/subcategory/create`,
+                data: {token, name, category_id},
+                success: function (data) {
+                    let response = jQuery.parseJSON(data);
+
+                    $('.notification')
+                        .css('display', 'block')
+                        .delay(4000)
+                        .slideUp(300)
+                        .html(response.success);
+                },
+                error: function(request, error) {
+                    let errors = jQuery.parseJSON(request.responseText);
+
+                    let ul = document.createElement('ul');
+
+                    $.each(errors, function (key, value) {
+                        let li = document.createElement('li');
+
+                        li.appendChild(document.createTextNode(value));
+                        ul.appendChild(li);
+                    });
+
+                    $('.notification')
+                        .css('display', 'block')
+                        .removeClass('primary')
+                        .addClass('alert')
+                        .delay(6000)
+                        .slideUp(300)
+                        .html(ul);
+                }
+            });
+        });
+    };
+
+}(window.ACMESTORE.admin));
+;(function (admin) {
+    'use strict';
+
     admin.delete = function () {
 
         $('table[data-form="deleteForm"]').on('click', '.delete-item', function (event) {
@@ -78,6 +130,57 @@ this.inputs.eq(t).attr({id:i,max:this.options.end,min:this.options.start,step:th
                 }
             });
         });
+
+        $('.update-subcategory').click(function (event) {
+            event.preventDefault();
+
+            const token = $(this).data('token');
+            const id = $(this).attr('id');
+            let category_id = $(this).data('category-id');
+            const name = $('#item-subcategory-name-'+id).val();
+
+            const selected_category_id = $('#item-category-' + category_id + ' option:selected').val();
+
+            if (category_id !== selected_category_id) {
+                category_id = selected_category_id;
+            }
+
+            $.ajax({
+                type: 'POST',
+                url: `/admin/product/subcategory/${id}/edit`,
+                data: {token, name, category_id},
+                success: function (data) {
+                    let response = jQuery.parseJSON(data);
+
+                    $('.notification')
+                        .css('display', 'block')
+                        .delay(4000)
+                        .slideUp(300)
+                        .html(response.success);
+                },
+                error: function(request, error) {
+                    let errors = jQuery.parseJSON(request.responseText);
+
+                    let ul = document.createElement('ul');
+
+                    $.each(errors, function (key, value) {
+                        let li = document.createElement('li');
+
+                        li.appendChild(document.createTextNode(value));
+                        ul.appendChild(li);
+                    });
+
+                    $('.notification')
+                        .css('display', 'block')
+                        .removeClass('primary')
+                        .addClass('alert')
+                        .delay(6000)
+                        .slideUp(300)
+                        .html(ul);
+                }
+            });
+        });
+
     };
 
 }(window.ACMESTORE.admin));
@@ -94,6 +197,7 @@ this.inputs.eq(t).attr({id:i,max:this.options.end,min:this.options.start,step:th
             case 'adminCategories':
                 ACMESTORE.admin.update();
                 ACMESTORE.admin.delete();
+                ACMESTORE.admin.create();
                 break;
             default:
                 // do nothing

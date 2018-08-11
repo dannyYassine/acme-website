@@ -16,11 +16,15 @@ use App\Classes\ValidateRequest;
 use App\Classes\Validators\CategoryValidator;
 use App\Models\Category;
 use App\Models\Mappers\CategoryTransformMapper;
+use App\Models\Mappers\SubCategoryTransformMapper;
+use App\Models\SubCategory;
 
 class ProductCategoryController
 {
     public $categories;
+    public $subcategories;
     public $links;
+    public $subcategories_links;
 
     public function __construct()
     {
@@ -31,7 +35,7 @@ class ProductCategoryController
     {
         return view(
             'admin/products/categories',
-            ['categories' => $this->categories, 'links' => $this->links]
+            ['categories' => $this->categories, 'links' => $this->links, 'subcategories' => $this->subcategories, 'subcategories_link' => $this->subcategories_links]
         );
     }
 
@@ -49,7 +53,13 @@ class ProductCategoryController
                     $errors = $validator->getErrorMessages();
                     return view(
                         'admin/products/categories',
-                        ['categories' => $this->categories, 'links' => $this->links, 'errors' => $errors]);
+                        [
+                            'categories' => $this->categories,
+                            'links' => $this->links,
+                            'errors' => $errors,
+                            'subcategories' => $this->subcategories,
+                            'subcategories_link' => $this->subcategories_links
+                        ]);
                 }
 
                 Category::create([
@@ -60,7 +70,10 @@ class ProductCategoryController
                 $this->fetchCategories();
                 return view(
                     'admin/products/categories',
-                    ['categories' => $this->categories, 'links' => $this->links, 'success' => 'Category created']);
+                    [
+                        'categories' => $this->categories, 'links' => $this->links, 'success' => 'Category created',
+                        'subcategories' => $this->subcategories, 'subcategories_link' => $this->subcategories_links
+                    ]);
             }
             throw new \Exception('Token mismatch');
         }
@@ -109,6 +122,8 @@ class ProductCategoryController
     private function fetchCategories()
     {
         $total = Category::all()->count();
+        $subtotal = SubCategory::all()->count();
         list($this->categories, $this->links) = paginate(4, $total, new CategoryTransformMapper());
+        list($this->subcategories, $this->subcategories_links) = paginate(4, $subtotal, new SubCategoryTransformMapper());
     }
 }
